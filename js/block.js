@@ -3,7 +3,6 @@ class Block {
     this.value = value;
     this.x = x;
     this.y = y;
-    this.color = this.getColor();
   }
 
 

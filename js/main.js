@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function(){
   restart.onclick = () => {
     let startValue = document.getElementById('starting-value');
     let size = document.getElementById('board-size').value;
-    ctx.clearRect(0, 0, 600, 600);
+    ctx.clearRect(0, 0, boardWidth, boardWidth);
 
     game = new Game(size, startValue, ctx, boardWidth);
     game.run();

@@ -16,9 +16,25 @@ class Game {
     this.addRandomBlock();
     this.renderBoard();
 
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'ArrowLeft') {
+        this.slideBlocksLeft();
+        console.log("left");
+      } else if(e.key === 'ArrowUp') {
+        this.slideBlocksUp();
+        console.log("up");
+      } else if(e.key === 'ArrowRight') {
+        this.slideBlocksRight();
+        console.log("right");
+      } else if(e.key === 'ArrowDown') {
+        this.slideBlocksDown();
+        console.log("down");
+      }
 
-    while (!this.gameover()) {
+    });
 
+    if (this.gameover()) {
+      console.log('game over');
     }
   }
 
@@ -93,7 +109,9 @@ class Game {
   }
 
   slideBlocksRight(){
-
+    for (let i = 0; i < this.size; i++) {
+      for (let j = this.size - 1; j > -1; j--) {
+        if()
   }
   slideBlocksLeft(){
 

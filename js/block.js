@@ -14,7 +14,7 @@ class Block {
       case 0:
         return "pink";
       case 1:
-        return "yellow";
+        return "lightblue";
       case 2:
         return "green";
       case 3:

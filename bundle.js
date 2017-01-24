@@ -137,13 +137,11 @@
 	    for(let i = 0; i < this.size; i++) {
 	      for(let j = 0; j < this.size; j++) {
 	        const block = new Block(-1, i, j);
-	        console.log(block);
 	        row.push(block);
 	      }
 	      matrix.push(row);
 	      row = [];
 	    }
-	    console.log(matrix);
 	    return matrix;
 	  }
 	
@@ -159,7 +157,6 @@
 	        this.ctx.rect(x, y, this.blockWidth, this.blockWidth);
 	        this.ctx.fillStyle = block.getColor();
 	
-	        console.log("block color",block.getColor());
 	        this.ctx.fill();
 	
 	        this.ctx.font = "20px Arial";
@@ -174,7 +171,6 @@
 	    while(positionFull) {
 	      let x = this.randomInt(0, this.size - 1);
 	      let y = this.randomInt(0, this.size - 1);
-	      console.log(x,y);
 	      if (this.positionEmpty(x,y)) {
 	        this.board[x][y].value = 1;
 	        positionFull = false;
@@ -207,13 +203,50 @@
 	  }
 	
 	  slideBlocksLeft(){
-	
+	    let emptyCount = 0;
+	    for (let i = 0; i < this.size; i++) {
+	      for (let j = 0; j < this.size; j++) {
+	        if(this.positionEmpty(i,j)) {
+	          emptyCount++;
+	        } else if (emptyCount !== 0) {
+	          this.board[i][j - emptyCount] = this.board[i][j];
+	          this.board[i][j] = new Block(-1, i, j);
+	        }
+	      }
+	      emptyCount = 0;
+	    }
+	    this.renderBoard();
 	  }
-	  slideBlocksDown(){
 	
+	  slideBlocksDown(){
+	    let emptyCount = 0;
+	    for (let col = 0; col < this.size; col++) {
+	      for (let row = this.size - 1; row >= 0; row--) {
+	        if(this.positionEmpty(row,col)) {
+	          emptyCount++;
+	        } else if (emptyCount !== 0) {
+	          this.board[row + emptyCount][col] = this.board[row][col];
+	          this.board[row][col] = new Block(-1, row, col);
+	        }
+	      }
+	      emptyCount = 0;
+	    }
+	    this.renderBoard();
 	  }
 	  slideBlocksUp(){
-	
+	    let emptyCount = 0;
+	    for (let col = 0; col < this.size; col++) {
+	      for (let row = 0; row < this.size; row++) {
+	        if(this.positionEmpty(row,col)) {
+	          emptyCount++;
+	        } else if (emptyCount !== 0) {
+	          this.board[row - emptyCount][col] = this.board[row][col];
+	          this.board[row][col] = new Block(-1, row, col);
+	        }
+	      }
+	      emptyCount = 0;
+	    }
+	    this.renderBoard();
 	  }
 	
 	
@@ -246,7 +279,7 @@
 	      case 0:
 	        return "pink";
 	      case 1:
-	        return "yellow";
+	        return "lightblue";
 	      case 2:
 	        return "green";
 	      case 3:

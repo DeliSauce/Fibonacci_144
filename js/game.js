@@ -10,8 +10,14 @@ class Game {
     this.sequence = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
   }
 
+
   run(){
     this.renderBoard();
+    this.addRandomBlock();
+    this.addRandomBlock();
+    this.addRandomBlock();
+    this.addRandomBlock();
+    this.addRandomBlock();
     this.addRandomBlock();
     this.addRandomBlock();
     this.renderBoard();
@@ -71,8 +77,8 @@ class Game {
       for (let j = 0; j < this.size; j++) {
         this.ctx.beginPath();
         let block = this.board[i][j];
-        let x = block.x + i * this.blockWidth;
-        let y = block.y + j * this.blockWidth;
+        let x = j * this.blockWidth;
+        let y = i * this.blockWidth;
 
         this.ctx.rect(x, y, this.blockWidth, this.blockWidth);
         this.ctx.fillStyle = block.getColor();
@@ -109,10 +115,21 @@ class Game {
   }
 
   slideBlocksRight(){
+    let emptyCount = 0;
     for (let i = 0; i < this.size; i++) {
-      for (let j = this.size - 1; j > -1; j--) {
-        if()
+      for (let j = this.size - 1; j >= 0; j--) {
+        if(this.positionEmpty(i,j)) {
+          emptyCount++;
+        } else if (emptyCount !== 0) {
+          this.board[i][j + emptyCount] = this.board[i][j];
+          this.board[i][j] = new Block(-1, i, j);
+        }
+      }
+      emptyCount = 0;
+    }
+    this.renderBoard();
   }
+
   slideBlocksLeft(){
 
   }

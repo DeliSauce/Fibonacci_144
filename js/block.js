@@ -1,8 +1,8 @@
 class Block {
-  constructor(value, x, y) {
+  constructor(value, row, col) {
     this.value = value;
-    this.x = x;
-    this.y = y;
+    this.row = row;
+    this.col = col;
   }
 
 

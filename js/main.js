@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function(){
   let boardWidth = gameboard.width;
   let game = new Game(5, 0, ctx, boardWidth);
   game.run();
+  window.board = game.board;
 
   let restart = document.getElementById("restart-button");
   restart.onclick = () => {

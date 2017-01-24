@@ -1,0 +1,73 @@
+html, body, header, nav, h1, a,
+ul, li, strong, main, button, i,
+section, img, div, h2, p, form,
+fieldset, label, input, textarea,
+span, article, footer, time, small {
+  margin: 0;
+  padding: 0;
+  // border: red solid 1px;
+  outline: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  vertical-align: inherit;
+  box-sizing: inherit;
+  background: transparent;
+  font-family: $sans-serif;
+}
+// border: solid 1px red;
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+input[type="text"],
+input[type="submit"],
+textarea,
+button {
+  /*
+  Get rid of native styling. Read more here:
+  http://css-tricks.com/almanac/properties/a/appearance/
+  */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/*button,
+input[type="submit"] {
+  cursor: pointer;
+}
+
+
+button {
+	background-color: white;
+	border-color: white;
+  border-style: none;
+	// color: white;
+	// font-weight: bold;
+	// padding: 7px 9px;
+	// border-radius: 3px;
+	// transition: background-color 0.3s;
+	// font-family: $sans-serif;
+	// text-transform: uppercase;
+	// font-size: 11px;
+	// text-align: center;
+}*/
+
+
+/* Clearfix */
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}

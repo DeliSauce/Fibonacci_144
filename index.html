@@ -13,16 +13,27 @@
 
     <h1> Fibonacci 144</h1>
     <div class="controls">
-      <label for="">Starting Value
-        <input type="text" id="starting-value" value="">
+      <label for="sequence">Starting Sequence
+        <select id="sequence">
+          <option value="0">0, 1, 1, 2, 3, 5</option>
+          <option selected value="1">1, 1, 2, 3, 5</option>
+        </select>
       </label>
+
       <button type="button" id="restart-button" name="">Restart Game</button>
-      <label for="">Board Size
-        <input type="text" id="board-size" >
+
+      <label for="board-size">Board Size
+        <select id="board-size">
+          <option selected value="4">4x4</option>
+          <option  value="5">5x5</option>
+          <option value="6">6x6</option>
+          <option value="7">7x7</option>
+        </select>
       </label>
+
     </div>
     <div class="gameboard">
-      <canvas id="canvas" width="600" height="600"></canvas>
+      <canvas id="canvas" class="canvas" width="500" height="500"></canvas>
     </div>
   </body>
 </html>

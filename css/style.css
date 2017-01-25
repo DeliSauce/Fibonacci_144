@@ -4,8 +4,9 @@ body {
   align-items: center;
 }
 h1 {
-  font-size: 20px;
-  font: Arial;
+  font-size: 30px;
+  font-family: 'Arial';
+  color: gray;
 }
 
 label {

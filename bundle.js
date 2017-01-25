@@ -67,17 +67,25 @@
 	  let game = new Game(size, sequence, ctx, boardWidth);
 	  game.run();
 	
-	  // window.board = game.board;
-	
 	   function newGame() {
-	    // let startValue = document.getElementById('starting-value');
-	    // let size = document.getElementById('board-size').value;
 	    console.log(boardWidth);
 	    size = sizePicker.value;
 	    sequence = sequencePicker.value;
 	    game.reset(size, sequence);
 	    window.size = size;
 	  }
+	
+	  window.addEventListener('keydown', (e) => {
+	    if(e.key === 'ArrowLeft') {
+	      game.moveBlocks('left');
+	    } else if(e.key === 'ArrowUp') {
+	      game.moveBlocks('up');
+	    } else if(e.key === 'ArrowRight') {
+	      game.moveBlocks('right');
+	    } else if(e.key === 'ArrowDown') {
+	      game.moveBlocks('down');
+	    }
+	  });
 	
 	});
 
@@ -102,6 +110,7 @@
 	  }
 	
 	  reset(size, sequence) {
+	    // window.removeEventListener('keydown', (e)=>{});
 	    this.size = parseInt(size);
 	    // this.sequence = sequence;
 	    // this.startValue = startValue;
@@ -120,42 +129,6 @@
 	    this.addRandomBlock();
 	    this.addRandomBlock();
 	    this.renderBlocks();
-	
-	    // console.log(!this.gameover());
-	    // while (true) {
-	      window.addEventListener('keydown', (e) => {
-	        if(e.key === 'ArrowLeft') {
-	          this.slideBlocksLeft();
-	          // this.addRandomBlock();
-	          // this.renderBlocks();
-	
-	        } else if(e.key === 'ArrowUp') {
-	          this.slideBlocksUp();
-	          // this.addRandomBlock();
-	          // this.renderBlocks();
-	
-	        } else if(e.key === 'ArrowRight') {
-	          this.slideBlocksRight();
-	          // setTimeout(() => {
-	            // this.addRandomBlock();
-	          // }, 500);
-	          // this.renderBlocks();
-	
-	        } else if(e.key === 'ArrowDown') {
-	          this.slideBlocksDown();
-	          // this.addRandomBlock();
-	          // this.renderBlocks();
-	
-	        }
-	        // window.closeEventListener();
-	      });
-	    //   window.setT
-	    // }
-	
-	    // while (!this.gameover()) {
-	    //
-	    //   // console.log('game over');
-	    // }
 	  }
 	
 	  gameover() {
@@ -238,6 +211,20 @@
 	    return (this.board[x][y].value === -1 ? true: false);
 	  }
 	
+	
+	  moveBlocks(direction) {
+	    switch(direction) {
+	      case 'left':
+	        return this.slideBlocksLeft();
+	      case 'right':
+	        return this.slideBlocksRight();
+	      case 'up':
+	        return this.slideBlocksUp();
+	      case 'down':
+	        return this.slideBlocksDown();
+	    }
+	  }
+	
 	  slideBlocksRight(){
 	    let emptyCount = 0;
 	    for (let i = 0; i < this.size; i++) {
@@ -256,7 +243,7 @@
 	    let skipConsolidated = true;
 	
 	    for (let i = 0; i < this.size; i++) {
-	      for (let j = this.size - 1; j >= 0; j--) {
+	      for (let j = this.size - 1; j > 0; j--) {
 	        if ( this.positionEmpty(i,j) && skipConsolidated ) {
 	          break; //breaks out of inner for loop when nothing to consolidate
 	        } else if (!skipConsolidated) {
@@ -282,6 +269,7 @@
 	      this.renderBlocks();
 	      setTimeout(() => {
 	        this.addRandomBlock();
+	        console.log("right slide random");
 	        this.renderBlocks();
 	      }, 200);
 	    }
@@ -332,17 +320,19 @@
 	      this.renderBlocks();
 	      setTimeout(() => {
 	        this.addRandomBlock();
+	        console.log("left slide random");
+	
 	        this.renderBlocks();
 	      }, 200);
 	    }
 	  }
 	
-	  nextFib(min,max) {
-	    if (min > max) {
-	      let temp = min;
-	      min = max;
-	      max = temp;
-	    }
+	  nextFib(max,min) {
+	    // if (min > max) {
+	    //   let temp = min;
+	    //   min = max;
+	    //   max = temp;
+	    // }
 	    let returnValue = -1;
 	    this.sequence.forEach((num, idx) => {
 	      if(num === min && this.sequence[idx + 1] === max) {
@@ -372,17 +362,15 @@
 	    let consolidated = false;
 	    let skipConsolidated = true;
 	
-	    for (let col = 0; col < this.size - 1; col++) {
-	      for (let row = this.size - 1; row >= 0; row--) {
+	    for (let col = 0; col < this.size; col++) {
+	      for (let row = this.size - 1; row > 0; row--) {
 	        if ( this.positionEmpty(row,col) && skipConsolidated ) {
 	          break; //breaks out of inner for loop when nothing to consolidate
 	        } else if (!skipConsolidated) {
 	          skipConsolidated  = true;
 	        } else {
-	          // let nextBlock = this.board[row - 1][col];
-	          // let nextValue = (nextBlock ? nextBlock.value : -1);
 	          let nextFib = this.nextFib(this.board[row][col].value, this.board[row - 1][col].value);
-	          // console.log("next fib", nextFib);
+	          console.log("next fib", nextFib);
 	          if (nextFib !== -1) {
 	            this.board[row][col].value = nextFib;
 	            this.board[row - 1][col].value = -1;
@@ -399,6 +387,8 @@
 	      this.renderBlocks();
 	      setTimeout(() => {
 	        this.addRandomBlock();
+	        console.log("down slide random");
+	
 	        this.renderBlocks();
 	      }, 200);
 	    }
@@ -448,6 +438,8 @@
 	      this.renderBlocks();
 	      setTimeout(() => {
 	        this.addRandomBlock();
+	        console.log("up slide random");
+	
 	        this.renderBlocks();
 	      }, 200);
 	    }

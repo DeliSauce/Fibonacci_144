@@ -21,16 +21,24 @@ document.addEventListener("DOMContentLoaded", function(){
   let game = new Game(size, sequence, ctx, boardWidth);
   game.run();
 
-  // window.board = game.board;
-
    function newGame() {
-    // let startValue = document.getElementById('starting-value');
-    // let size = document.getElementById('board-size').value;
     console.log(boardWidth);
     size = sizePicker.value;
     sequence = sequencePicker.value;
     game.reset(size, sequence);
     window.size = size;
   }
+
+  window.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowLeft') {
+      game.moveBlocks('left');
+    } else if(e.key === 'ArrowUp') {
+      game.moveBlocks('up');
+    } else if(e.key === 'ArrowRight') {
+      game.moveBlocks('right');
+    } else if(e.key === 'ArrowDown') {
+      game.moveBlocks('down');
+    }
+  });
 
 });

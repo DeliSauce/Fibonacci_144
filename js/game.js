@@ -5,6 +5,7 @@ class Game {
     this.size = parseInt(size);
     // this.sequence = sequence;
     // this.startValue = startValue;
+    this.over = false;
     this.ctx = ctx;
     this.boardWidth = boardWidth;
     this.borderWidth = 5;
@@ -16,6 +17,7 @@ class Game {
   reset(size, sequence) {
     // window.removeEventListener('keydown', (e)=>{});
     this.size = parseInt(size);
+    this.over = false;
     // this.sequence = sequence;
     // this.startValue = startValue;
     // this.ctx = ctx;

@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function(){
   let sizePicker = document.getElementById('board-size');
   let restartButton = document.getElementById("restart-button");
 
-  sequencePicker.onchange = newGame;
-  sizePicker.onchange = newGame;
+  // sequencePicker.onchange = newGame;
+  // sizePicker.onchange = newGame;
   restartButton.onclick = newGame;
 
   let size = sizePicker.value;
@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function(){
   game.run();
 
    function newGame() {
-    console.log(boardWidth);
     size = sizePicker.value;
     sequence = sequencePicker.value;
     game.reset(size, sequence);
@@ -30,14 +29,16 @@ document.addEventListener("DOMContentLoaded", function(){
   }
 
   window.addEventListener('keydown', (e) => {
-    if(e.key === 'ArrowLeft') {
-      game.moveBlocks('left');
-    } else if(e.key === 'ArrowUp') {
-      game.moveBlocks('up');
-    } else if(e.key === 'ArrowRight') {
-      game.moveBlocks('right');
-    } else if(e.key === 'ArrowDown') {
-      game.moveBlocks('down');
+    if(!game.over) {
+      if(e.key === 'ArrowLeft') {
+        game.moveBlocks('left');
+      } else if(e.key === 'ArrowUp') {
+        game.moveBlocks('up');
+      } else if(e.key === 'ArrowRight') {
+        game.moveBlocks('right');
+      } else if(e.key === 'ArrowDown') {
+        game.moveBlocks('down');
+      }
     }
   });
 

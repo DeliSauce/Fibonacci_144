@@ -7,6 +7,7 @@ h1 {
   font-size: 30px;
   font-family: 'Arial';
   color: gray;
+  /*text-transform: uppercase;*/
 }
 
 label {
@@ -24,8 +25,20 @@ label {
   margin: 0 20px;
 }
 
-.game-title {
+/*.game-title {
   font-size: 40px;
+
+}*/
+
+.gameplay {
+  display: flex;
+}
+
+.sidebar {
+  width: 100px;
+  height: 500px;
+  border: 1px solid blue;
+  margin: 0 30px;
 }
 
 .gameboard {

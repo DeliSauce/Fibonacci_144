@@ -21,7 +21,6 @@
       </label>
 
       <button type="button" id="restart-button" name="">Restart Game</button>
-
       <label for="board-size">Board Size
         <select id="board-size">
           <option selected value="4">4x4</option>
@@ -32,8 +31,16 @@
       </label>
 
     </div>
-    <div class="gameboard">
-      <canvas id="canvas" class="canvas" width="500" height="500"></canvas>
+    <div class="gameplay">
+      <div class="sequence-tracker sidebar">
+
+      </div>
+      <div class="gameboard">
+        <canvas id="canvas" class="canvas" width="500" height="500"></canvas>
+      </div>
+      <div class="sidebar">
+
+      </div>
     </div>
   </body>
 </html>

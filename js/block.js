@@ -22,19 +22,19 @@ class Block {
       case 5:
         return "blue";
       case 8:
-        return "white";
+        return "brown";
       case 13:
-        return "white";
+        return "purple";
       case 21:
-        return "white";
+        return "yellow";
       case 34:
-        return "white";
+        return "purple";
       case 55:
-        return "white";
+        return "purple";
       case 89:
-        return "white";
+        return "purple";
       case 144:
-        return "white";
+        return "purple";
     }
   }
 }

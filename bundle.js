@@ -98,26 +98,41 @@
 	    this.addRandomBlock();
 	    this.renderBoard();
 	
-	    window.addEventListener('keydown', (e) => {
-	      if(e.key === 'ArrowLeft') {
-	        this.slideBlocksLeft();
-	        console.log("left");
-	      } else if(e.key === 'ArrowUp') {
-	        this.slideBlocksUp();
-	        console.log("up");
-	      } else if(e.key === 'ArrowRight') {
-	        this.slideBlocksRight();
-	        console.log("right");
-	      } else if(e.key === 'ArrowDown') {
-	        this.slideBlocksDown();
-	        console.log("down");
-	      }
+	    // console.log(!this.gameover());
+	    // while (true) {
+	      window.addEventListener('keydown', (e) => {
+	        if(e.key === 'ArrowLeft') {
+	          this.slideBlocksLeft();
+	          // this.addRandomBlock();
+	          // this.renderBoard();
 	
-	    });
+	        } else if(e.key === 'ArrowUp') {
+	          this.slideBlocksUp();
+	          // this.addRandomBlock();
+	          // this.renderBoard();
 	
-	    if (this.gameover()) {
-	      console.log('game over');
-	    }
+	        } else if(e.key === 'ArrowRight') {
+	          this.slideBlocksRight();
+	          // setTimeout(() => {
+	            // this.addRandomBlock();
+	          // }, 500);
+	          // this.renderBoard();
+	
+	        } else if(e.key === 'ArrowDown') {
+	          this.slideBlocksDown();
+	          // this.addRandomBlock();
+	          // this.renderBoard();
+	
+	        }
+	        // window.closeEventListener();
+	      });
+	    //   window.setT
+	    // }
+	
+	    // while (!this.gameover()) {
+	    //
+	    //   // console.log('game over');
+	    // }
 	  }
 	
 	  gameover() {
@@ -175,6 +190,7 @@
 	        this.board[x][y].value = 1;
 	        positionFull = false;
 	      }
+	      console.log('added random', x, y);
 	    }
 	  }
 	
@@ -199,10 +215,12 @@
 	      }
 	      emptyCount = 0;
 	    }
+	    this.addRandomBlock();
 	    this.renderBoard();
 	  }
 	
 	  slideBlocksLeft(){
+	    console.log("begin left slide");
 	    let emptyCount = 0;
 	    for (let i = 0; i < this.size; i++) {
 	      for (let j = 0; j < this.size; j++) {
@@ -215,8 +233,61 @@
 	      }
 	      emptyCount = 0;
 	    }
+	
+	    let consolidated = false;
+	    let skipConsolidated = true;
+	
+	    for (let i = 0; i < this.size; i++) {
+	      for (let j = 0; j < this.size - 1; j++) {
+	        if ( this.positionEmpty(i,j) && skipConsolidated ) {
+	          break; //breaks out of inner for loop when nothing to consolidate
+	        } else if (!skipConsolidated) {
+	          skipConsolidated  = true;
+	        } else {
+	          let nextFib = this.nextFib(this.board[i][j].value, this.board[i][j+1].value);
+	          // console.log("next fib", nextFib);
+	          if (nextFib !== -1) {
+	            this.board[i][j].value = nextFib;
+	            this.board[i][j+1].value = -1;
+	            skipConsolidated  = false;
+	            consolidated = true;
+	          }
+	        }
+	      }
+	    }
 	    this.renderBoard();
+	    if(consolidated) {
+	      this.slideBlocksLeft();
+	    } else {
+	      this.renderBoard();
+	      setTimeout(() => {
+	        this.addRandomBlock();
+	        this.renderBoard();
+	      }, 200);
+	    }
+	
+	
+	
+	
 	  }
+	
+	  nextFib(min,max) {
+	    if (min > max) {
+	      let temp = min;
+	      min = max;
+	      max = temp;
+	    }
+	    let returnValue = -1;
+	    this.sequence.forEach((num, idx) => {
+	      if(num === min && this.sequence[idx + 1] === max) {
+	        returnValue = min + max;
+	      }
+	    });
+	    return returnValue;
+	  }
+	
+	
+	
 	
 	  slideBlocksDown(){
 	    let emptyCount = 0;
@@ -231,8 +302,10 @@
 	      }
 	      emptyCount = 0;
 	    }
+	    this.addRandomBlock();
 	    this.renderBoard();
 	  }
+	
 	  slideBlocksUp(){
 	    let emptyCount = 0;
 	    for (let col = 0; col < this.size; col++) {
@@ -246,6 +319,7 @@
 	      }
 	      emptyCount = 0;
 	    }
+	    this.addRandomBlock();
 	    this.renderBoard();
 	  }
 	
@@ -275,7 +349,7 @@
 	  getColor() {
 	    switch (this.value) {
 	      case -1:
-	        return "grey";
+	        return "white";
 	      case 0:
 	        return "pink";
 	      case 1:

@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function(){
   let game = new Game(size, sequence, ctx, boardWidth);
   game.run();
 
-   function newGame() {
+  function newGame() {
     size = sizePicker.value;
     sequence = sequencePicker.value;
     game.reset(size, sequence);

@@ -1,28 +1,38 @@
+h1, li, label, select, button {
+  font-family: arial;
+}
+
+/** {
+  border: 1px solid red;
+}*/
+
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 h1 {
-  font-size: 30px;
-  font-family: 'Arial';
+  font-size: 40px;
   color: gray;
+  margin: 30px 0;
   /*text-transform: uppercase;*/
 }
 
 label {
   display: flex;
   flex-direction: column;
+  margin: 10px 0;
+  align-items: center;
+  font-size: 20px;
 }
 
 .controls {
   display: flex;
-  flex-direction: row;
-  margin: 20px;
-}
-
-.controls > * {
-  margin: 0 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 500px;
 }
 
 .sequence-tracker {
@@ -31,28 +41,54 @@ label {
   flex-direction: column;
   align-content:flex-end;
 }
+button, select {
+  cursor: pointer;
+  width: 120px;
+}
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: darkgray;
+	border: gray 1px solid;
+  color: white;
+  height: 50px;
+  margin: 15px 0;
+  text-align: center;
+}
+
+button:hover {
+  background-color: gray;
+}
+
+select {
+  height: 25px;
+  font-size: 20px;
+}
 
 .sequence-tracker > * {
-  margin: 5px 0;
-  font-size: 20px;
+  padding: 5px 0;
+  font-size: 25px;
   text-align: center;
   color: grey;
-}
-/*.game-title {
-  font-size: 40px;
-
-}*/
-
-.gameplay {
-  display: flex;
 }
 
 .sidebar {
   width: 100px;
   height: 500px;
-  border: 1px solid blue;
   margin: 0 30px;
 }
+.highlighted {
+  color: black;
+  background-color: lightgray;
+}
+
+
+.gameplay {
+  display: flex;
+}
+
 
 .gameboard {
   display: flex;
@@ -61,18 +97,4 @@ label {
 
 
 /*@media(min-height: 500px) {
-}*/
-
-/*.canvas {
-  height: 600px;
-  width: 600px;
-}*/
-
-/*ul {
-
-}
-li {
-  width: 100px;
-  height: 100px;
-  border: 1px solid red;
 }*/

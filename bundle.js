@@ -67,7 +67,7 @@
 	  let game = new Game(size, sequence, ctx, boardWidth);
 	  game.run();
 	
-	   function newGame() {
+	  function newGame() {
 	    size = sizePicker.value;
 	    sequence = sequencePicker.value;
 	    game.reset(size, sequence);
@@ -115,7 +115,7 @@
 	    // window.removeEventListener('keydown', (e)=>{});
 	    this.size = parseInt(size);
 	    this.over = false;
-	    // this.sequence = sequence;
+	    this.startSequence = sequence;
 	    // this.startValue = startValue;
 	    // this.ctx = ctx;
 	    this.borderWidth = 5;
@@ -136,23 +136,25 @@
 	  }
 	
 	  populateSidebar() {
+	    const $sidebar = $('.sequence-tracker');
+	    $sidebar.empty();
 	    let sidebarValues = this.sequence;
-	    if (this.startSequence === 1) {
+	    if (this.startSequence === '1') {
 	      sidebarValues = sidebarValues.slice(1);
 	    }
 	
-	    const $sidebar = $('.sequence-tracker');
 	    sidebarValues.forEach((num) => {
 	      let $fibNum = $("<div></div>");
 	      $fibNum.text(num);
-	      $fibNum.addClass("fibNum");
-	      $fibNum.addClass(num.toString());
+	      $fibNum.addClass("fibNum_" + num.toString());
+	      if (num <= 1) $fibNum.addClass("highlighted");
 	      $sidebar.append($fibNum);
 	    });
+	
 	  }
 	
 	  updateSidebar() {
-	    
+	
 	  }
 	
 	  maxBoxValue() {
@@ -163,6 +165,7 @@
 	    return max;
 	  }
 	
+	  //need to update
 	  gameover() {
 	    for(let i = 0; i < this.size; i++) {
 	      for(let j = 0; j < this.size; j++) {
@@ -227,8 +230,12 @@
 	    while(positionFull) {
 	      let x = this.randomInt(0, this.size - 1);
 	      let y = this.randomInt(0, this.size - 1);
+	      let value = 1;
+	      if (this.startSequence === '0') {
+	        value = (Math.random() < .25 ? 0 : 1);
+	      }
 	      if (this.positionEmpty(x,y)) {
-	        this.board[x][y].value = 1;
+	        this.board[x][y].value = value;
 	        positionFull = false;
 	      }
 	      console.log('added random', x, y);
@@ -497,7 +504,7 @@
 	  getColor() {
 	    switch (this.value) {
 	      case -1:
-	        return "pink";
+	        return "#66A5AD";
 	      case 0:
 	        return "teal";
 	      case 1:

@@ -10,7 +10,7 @@ class Block {
   getColor() {
     switch (this.value) {
       case -1:
-        return "pink";
+        return "#66A5AD";
       case 0:
         return "teal";
       case 1:

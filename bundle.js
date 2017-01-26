@@ -98,9 +98,9 @@
 	const Block = __webpack_require__(2);
 	
 	class Game {
-	  constructor(size, sequence, ctx, boardWidth) {
+	  constructor(size, startSequence, ctx, boardWidth) {
 	    this.size = parseInt(size);
-	    // this.sequence = sequence;
+	    this.startSequence = startSequence;
 	    // this.startValue = startValue;
 	    this.over = false;
 	    this.ctx = ctx;
@@ -128,10 +128,39 @@
 	
 	
 	  run(){
+	    this.populateSidebar();
 	    this.renderBoard();
 	    this.addRandomBlock();
 	    this.addRandomBlock();
 	    this.renderBlocks();
+	  }
+	
+	  populateSidebar() {
+	    let sidebarValues = this.sequence;
+	    if (this.startSequence === 1) {
+	      sidebarValues = sidebarValues.slice(1);
+	    }
+	
+	    const $sidebar = $('.sequence-tracker');
+	    sidebarValues.forEach((num) => {
+	      let $fibNum = $("<div></div>");
+	      $fibNum.text(num);
+	      $fibNum.addClass("fibNum");
+	      $fibNum.addClass(num.toString());
+	      $sidebar.append($fibNum);
+	    });
+	  }
+	
+	  updateSidebar() {
+	    
+	  }
+	
+	  maxBoxValue() {
+	    let max = 1;
+	    this.board.forEach((block) => {
+	      if (block.value > 1) max = block.value;
+	    });
+	    return max;
 	  }
 	
 	  gameover() {

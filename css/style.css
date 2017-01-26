@@ -25,6 +25,19 @@ label {
   margin: 0 20px;
 }
 
+.sequence-tracker {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-content:flex-end;
+}
+
+.sequence-tracker > * {
+  margin: 5px 0;
+  font-size: 20px;
+  text-align: center;
+  color: grey;
+}
 /*.game-title {
   font-size: 40px;
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title class="game-title">Fibonacci 144</title>
+    <title class="game-title">FIBONACCI 144</title>
     <meta charset="utf-8">
     <link href="css/reset.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -9,21 +9,28 @@
     <script type="application/javascript" src="bundle.js"></script>
     <script type="text/javascript"> </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+    <!-- <script src="./instructions.js"></script> -->
   </head>
   <body>
     <div class="header">
-      <h1> Fibonacci 144</h1>
+      <h1> FIBONACCI 144</h1>
     </div>
 
     <div class="gameplay">
-      <div class="sidebar">
+
+      <div class="sidebar-left">
+        <div class="sequence-tracker-header">
+          Max Score
+        </div>
         <div class="sequence-tracker">
 
         </div>
       </div>
+
       <div class="gameboard">
         <canvas id="canvas" class="canvas" width="500" height="500"></canvas>
       </div>
+
       <div class="controls">
         <label for="board-size">Board Size
           <select id="board-size">
@@ -33,7 +40,6 @@
             <option value="7">7x7</option>
           </select>
         </label>
-
         <label for="sequence">Sequence
           <select id="sequence">
             <option value="0">0, 1, ...</option>
@@ -43,6 +49,43 @@
         <div class="button-container">
           <button type="button" id="restart-button" name="">Restart Game</button>
         </div>
+        <div class="button-container">
+          <button type="button" id="instructions-button" name="">Instructions</button>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="instructions-container hide-instructions">
+
+      <div class="instructions-box">
+
+        <!-- <h1 class="instructions-header ">Instructions</h1> -->
+
+        <h2 class="instructions-section ">Background</h2>
+
+        <p>
+          Fibonacci 1044 is based on the popular game 2048, replacing 2048's sequence with the Fibonacci Sequence (0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...)
+          <a href="https://en.wikipedia.org/wiki/Fibonacci_number" target="_blank">Wikipedia</a>
+        </p>
+
+        <h2 class="instructions-section ">Goal</h2>
+        <p>
+          Slide the numbered blocks into each other, to create new blocks with higher values. You win if you can get to 144.
+        </p>
+
+        <h2 class="instructions-section ">Gameplay</h2>
+        <p>
+          Using the arrow keys on your keyboard (up, down, left, right), you can push all the blocks on the game board in that direction. The blocks will slide as far as possible and will stop only upon coming in contact with the edge of the board or another block. If the act of sliding causes two sequential Fibonacci numbers to collide, they will reduce to one block with the next value in the sequence. After each turn a new block will be randomly added to the board.
+        </p>
+
+        <h2 class="instructions-section ">Options</h2>
+        <p>
+          You can choose the size of the game board from 4x4 grid all the way up to 7x7. You also have the option of starting the Fibonacci sequence with a 0 (0, 1, 1, 2, ...) or 1 (1, 1, 2, ...).
+        </p>
+
+        <button type="button" name="button" id="close-button">Close</button>
 
       </div>
     </div>

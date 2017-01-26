@@ -10,31 +10,31 @@ class Block {
   getColor() {
     switch (this.value) {
       case -1:
-        return "#66A5AD";
+        return "#f1f1f2";
       case 0:
-        return "teal";
+        return "#c4dfe6";
       case 1:
-        return "lightblue";
+        return "#66a5ad";
       case 2:
-        return "green";
+        return "#75b1a9";
       case 3:
-        return "red";
+        return "#2c7873";
       case 5:
-        return "blue";
+        return "#1995ad";
       case 8:
-        return "brown";
+        return "#07575b";
       case 13:
-        return "purple";
+        return "#6e6702";
       case 21:
-        return "yellow";
+        return "#86ac41";
       case 34:
-        return "purple";
+        return "#b3c100";
       case 55:
-        return "purple";
+        return "#d9b44a";
       case 89:
-        return "purple";
+        return "#ffd64d";
       case 144:
-        return "purple";
+        return "#cb6318";
     }
   }
 }

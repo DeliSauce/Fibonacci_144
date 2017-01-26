@@ -1,6 +1,5 @@
 const Game = require("./game");
-// const View = require("./view");
-
+// const Instructions = require("./instructions");
 
 document.addEventListener("DOMContentLoaded", function(){
   const gameboard = document.getElementById("canvas");
@@ -32,14 +31,37 @@ document.addEventListener("DOMContentLoaded", function(){
     if(!game.over) {
       if(e.key === 'ArrowLeft') {
         game.moveBlocks('left');
+        // game.updateSidebar();
       } else if(e.key === 'ArrowUp') {
         game.moveBlocks('up');
+        // game.updateSidebar();
       } else if(e.key === 'ArrowRight') {
         game.moveBlocks('right');
+        // game.updateSidebar();
       } else if(e.key === 'ArrowDown') {
         game.moveBlocks('down');
+        // game.updateSidebar();
       }
     }
   });
+
+  const $instructions = $('.instructions-container');
+
+
+  let instructionsButton = document.getElementById("instructions-button");
+  let closeInstructionsButton = document.getElementById("close-button");
+
+  instructionsButton.onclick = showInstructions;
+  closeInstructionsButton.onclick = hideInstructions;
+
+  function showInstructions() {
+    $instructions.removeClass("hide-instructions");
+    $instructions.addClass("show-instructions");
+  }
+
+  function hideInstructions() {
+    $instructions.removeClass("show-instructions");
+    $instructions.addClass("hide-instructions");
+  }
 
 });

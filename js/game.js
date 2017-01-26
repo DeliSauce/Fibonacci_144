@@ -1,30 +1,27 @@
 const Block = require("./block");
 
+const FIBONACCI = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
+
 class Game {
   constructor(size, startSequence, ctx, boardWidth) {
     this.size = parseInt(size);
-    this.startSequence = startSequence;
-    // this.startValue = startValue;
+    this.startSequence = parseInt(startSequence);
     this.over = false;
     this.ctx = ctx;
     this.boardWidth = boardWidth;
     this.borderWidth = 5;
     this.blockWidth = (boardWidth - (this.size + 1) * this.borderWidth)/size;
     this.board = this.setupBoard();
-    this.sequence = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
+    this.sequence = FIBONACCI.slice(this.startSequence);
   }
 
-  reset(size, sequence) {
-    // window.removeEventListener('keydown', (e)=>{});
+  reset(size, startSequence) {
     this.size = parseInt(size);
     this.over = false;
-    this.startSequence = sequence;
-    // this.startValue = startValue;
-    // this.ctx = ctx;
-    this.borderWidth = 5;
+    this.startSequence = parseInt(startSequence);
+    this.sequence = FIBONACCI.slice(this.startSequence);
     this.blockWidth = (this.boardWidth - (this.size + 1) * this.borderWidth)/size;
     this.board = this.setupBoard();
-    // this.sequence = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
     this.ctx.clearRect(0, 0, this.boardWidth, this.boardWidth);
     this.run();
   }
@@ -42,9 +39,9 @@ class Game {
     const $sidebar = $('.sequence-tracker');
     $sidebar.empty();
     let sidebarValues = this.sequence;
-    if (this.startSequence === '1') {
-      sidebarValues = sidebarValues.slice(1);
-    }
+    // if (this.startSequence === 1) {
+    //   sidebarValues = sidebarValues.slice(1);
+    // }
 
     sidebarValues.forEach((num) => {
       let $fibNum = $("<div></div>");
@@ -53,22 +50,30 @@ class Game {
       if (num <= 1) $fibNum.addClass("highlighted");
       $sidebar.append($fibNum);
     });
-
   }
 
   updateSidebar() {
+    let max = this.maxBoxValue();
+    this.sequence.forEach((num) => {
+      let $num = $('.fibNum_' + num.toString());
+      if (num <= max) {
+        $num.addClass("highlighted");
+      }
+    });
 
   }
 
   maxBoxValue() {
     let max = 1;
-    this.board.forEach((block) => {
-      if (block.value > 1) max = block.value;
+    this.board.forEach((row) => {
+      row.forEach((block) => {
+        if (block.value > max) max = block.value;
+      });
     });
     return max;
   }
 
-  //need to update
+  // TODO need to update
   gameover() {
     for(let i = 0; i < this.size; i++) {
       for(let j = 0; j < this.size; j++) {
@@ -93,17 +98,17 @@ class Game {
     }
     return matrix;
   }
+
   renderBoard(){
-    console.log(this.boardWidth);
     this.ctx.clearRect(0, 0, this.boardWidth, this.boardWidth);
     this.ctx.rect(0, 0, this.boardWidth, this.boardWidth);
-    this.ctx.fillStyle = 'grey';
+    this.ctx.fillStyle = '#b7b8b6';
     this.ctx.fill();
     this.ctx.closePath();
   }
 
   renderBlocks(){
-    // this.ctx.clearRect(0, 0, this.boardWidth, this.boardWidth);
+    this.updateSidebar();
     for (let i = 0; i < this.size; i++) {
       for (let j = 0; j < this.size; j++) {
         this.ctx.beginPath();
@@ -134,14 +139,13 @@ class Game {
       let x = this.randomInt(0, this.size - 1);
       let y = this.randomInt(0, this.size - 1);
       let value = 1;
-      if (this.startSequence === '0') {
+      if (this.startSequence === 0) {
         value = (Math.random() < .25 ? 0 : 1);
       }
       if (this.positionEmpty(x,y)) {
         this.board[x][y].value = value;
         positionFull = false;
       }
-      console.log('added random', x, y);
     }
   }
 
@@ -191,10 +195,7 @@ class Game {
         } else if (!skipConsolidated) {
           skipConsolidated  = true;
         } else {
-          // let nextBlock = this.board[i][j-1];
-          // let nextValue = (nextBlock ? nextBlock.value : -1);
           let nextFib = this.nextFib(this.board[i][j].value, this.board[i][j-1].value);
-          // console.log("next fib", nextFib);
           if (nextFib !== -1) {
             this.board[i][j].value = nextFib;
             this.board[i][j-1].value = -1;
@@ -211,14 +212,12 @@ class Game {
       this.renderBlocks();
       setTimeout(() => {
         this.addRandomBlock();
-        console.log("right slide random");
         this.renderBlocks();
       }, 200);
     }
   }
 
   slideBlocksLeft(){
-    console.log("begin left slide");
     let emptyCount = 0;
     for (let i = 0; i < this.size; i++) {
       for (let j = 0; j < this.size; j++) {
@@ -242,10 +241,7 @@ class Game {
         } else if (!skipConsolidated) {
           skipConsolidated  = true;
         } else {
-          // let nextBlock = this.board[i][j+1];
-          // let nextValue = (nextBlock ? nextBlock.value : -1);
           let nextFib = this.nextFib(this.board[i][j].value, this.board[i][j+1].value);
-          // console.log("next fib", nextFib);
           if (nextFib !== -1) {
             this.board[i][j].value = nextFib;
             this.board[i][j+1].value = -1;
@@ -262,8 +258,6 @@ class Game {
       this.renderBlocks();
       setTimeout(() => {
         this.addRandomBlock();
-        console.log("left slide random");
-
         this.renderBlocks();
       }, 200);
     }
@@ -312,7 +306,6 @@ class Game {
           skipConsolidated  = true;
         } else {
           let nextFib = this.nextFib(this.board[row][col].value, this.board[row - 1][col].value);
-          console.log("next fib", nextFib);
           if (nextFib !== -1) {
             this.board[row][col].value = nextFib;
             this.board[row - 1][col].value = -1;
@@ -329,8 +322,6 @@ class Game {
       this.renderBlocks();
       setTimeout(() => {
         this.addRandomBlock();
-        console.log("down slide random");
-
         this.renderBlocks();
       }, 200);
     }
@@ -360,10 +351,7 @@ class Game {
         } else if (!skipConsolidated) {
           skipConsolidated  = true;
         } else  {
-          // let nextBlock = ;
-          // let nextValue = (nextBlock ? nextBlock.value : -1);
           let nextFib = this.nextFib(this.board[row][col].value, this.board[row + 1][col].value);
-          // console.log("next fib", nextFib);
           if (nextFib !== -1) {
             this.board[row][col].value = nextFib;
             this.board[row + 1][col].value = -1;
@@ -380,8 +368,6 @@ class Game {
       this.renderBlocks();
       setTimeout(() => {
         this.addRandomBlock();
-        console.log("up slide random");
-
         this.renderBlocks();
       }, 200);
     }

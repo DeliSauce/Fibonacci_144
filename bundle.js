@@ -45,8 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	const Game = __webpack_require__(1);
-	// const View = require("./view");
-	
+	// const Instructions = require("./instructions");
 	
 	document.addEventListener("DOMContentLoaded", function(){
 	  const gameboard = document.getElementById("canvas");
@@ -78,15 +77,38 @@
 	    if(!game.over) {
 	      if(e.key === 'ArrowLeft') {
 	        game.moveBlocks('left');
+	        // game.updateSidebar();
 	      } else if(e.key === 'ArrowUp') {
 	        game.moveBlocks('up');
+	        // game.updateSidebar();
 	      } else if(e.key === 'ArrowRight') {
 	        game.moveBlocks('right');
+	        // game.updateSidebar();
 	      } else if(e.key === 'ArrowDown') {
 	        game.moveBlocks('down');
+	        // game.updateSidebar();
 	      }
 	    }
 	  });
+	
+	  const $instructions = $('.instructions-container');
+	
+	
+	  let instructionsButton = document.getElementById("instructions-button");
+	  let closeInstructionsButton = document.getElementById("close-button");
+	
+	  instructionsButton.onclick = showInstructions;
+	  closeInstructionsButton.onclick = hideInstructions;
+	
+	  function showInstructions() {
+	    $instructions.removeClass("hide-instructions");
+	    $instructions.addClass("show-instructions");
+	  }
+	
+	  function hideInstructions() {
+	    $instructions.removeClass("show-instructions");
+	    $instructions.addClass("hide-instructions");
+	  }
 	
 	});
 
@@ -97,31 +119,28 @@
 
 	const Block = __webpack_require__(2);
 	
+	const FIBONACCI = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
+	
 	class Game {
 	  constructor(size, startSequence, ctx, boardWidth) {
 	    this.size = parseInt(size);
-	    this.startSequence = startSequence;
-	    // this.startValue = startValue;
+	    this.startSequence = parseInt(startSequence);
 	    this.over = false;
 	    this.ctx = ctx;
 	    this.boardWidth = boardWidth;
 	    this.borderWidth = 5;
 	    this.blockWidth = (boardWidth - (this.size + 1) * this.borderWidth)/size;
 	    this.board = this.setupBoard();
-	    this.sequence = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
+	    this.sequence = FIBONACCI.slice(this.startSequence);
 	  }
 	
-	  reset(size, sequence) {
-	    // window.removeEventListener('keydown', (e)=>{});
+	  reset(size, startSequence) {
 	    this.size = parseInt(size);
 	    this.over = false;
-	    this.startSequence = sequence;
-	    // this.startValue = startValue;
-	    // this.ctx = ctx;
-	    this.borderWidth = 5;
+	    this.startSequence = parseInt(startSequence);
+	    this.sequence = FIBONACCI.slice(this.startSequence);
 	    this.blockWidth = (this.boardWidth - (this.size + 1) * this.borderWidth)/size;
 	    this.board = this.setupBoard();
-	    // this.sequence = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
 	    this.ctx.clearRect(0, 0, this.boardWidth, this.boardWidth);
 	    this.run();
 	  }
@@ -139,9 +158,9 @@
 	    const $sidebar = $('.sequence-tracker');
 	    $sidebar.empty();
 	    let sidebarValues = this.sequence;
-	    if (this.startSequence === '1') {
-	      sidebarValues = sidebarValues.slice(1);
-	    }
+	    // if (this.startSequence === 1) {
+	    //   sidebarValues = sidebarValues.slice(1);
+	    // }
 	
 	    sidebarValues.forEach((num) => {
 	      let $fibNum = $("<div></div>");
@@ -150,22 +169,30 @@
 	      if (num <= 1) $fibNum.addClass("highlighted");
 	      $sidebar.append($fibNum);
 	    });
-	
 	  }
 	
 	  updateSidebar() {
+	    let max = this.maxBoxValue();
+	    this.sequence.forEach((num) => {
+	      let $num = $('.fibNum_' + num.toString());
+	      if (num <= max) {
+	        $num.addClass("highlighted");
+	      }
+	    });
 	
 	  }
 	
 	  maxBoxValue() {
 	    let max = 1;
-	    this.board.forEach((block) => {
-	      if (block.value > 1) max = block.value;
+	    this.board.forEach((row) => {
+	      row.forEach((block) => {
+	        if (block.value > max) max = block.value;
+	      });
 	    });
 	    return max;
 	  }
 	
-	  //need to update
+	  // TODO need to update
 	  gameover() {
 	    for(let i = 0; i < this.size; i++) {
 	      for(let j = 0; j < this.size; j++) {
@@ -190,17 +217,17 @@
 	    }
 	    return matrix;
 	  }
+	
 	  renderBoard(){
-	    console.log(this.boardWidth);
 	    this.ctx.clearRect(0, 0, this.boardWidth, this.boardWidth);
 	    this.ctx.rect(0, 0, this.boardWidth, this.boardWidth);
-	    this.ctx.fillStyle = 'grey';
+	    this.ctx.fillStyle = '#b7b8b6';
 	    this.ctx.fill();
 	    this.ctx.closePath();
 	  }
 	
 	  renderBlocks(){
-	    // this.ctx.clearRect(0, 0, this.boardWidth, this.boardWidth);
+	    this.updateSidebar();
 	    for (let i = 0; i < this.size; i++) {
 	      for (let j = 0; j < this.size; j++) {
 	        this.ctx.beginPath();
@@ -231,14 +258,13 @@
 	      let x = this.randomInt(0, this.size - 1);
 	      let y = this.randomInt(0, this.size - 1);
 	      let value = 1;
-	      if (this.startSequence === '0') {
+	      if (this.startSequence === 0) {
 	        value = (Math.random() < .25 ? 0 : 1);
 	      }
 	      if (this.positionEmpty(x,y)) {
 	        this.board[x][y].value = value;
 	        positionFull = false;
 	      }
-	      console.log('added random', x, y);
 	    }
 	  }
 	
@@ -288,10 +314,7 @@
 	        } else if (!skipConsolidated) {
 	          skipConsolidated  = true;
 	        } else {
-	          // let nextBlock = this.board[i][j-1];
-	          // let nextValue = (nextBlock ? nextBlock.value : -1);
 	          let nextFib = this.nextFib(this.board[i][j].value, this.board[i][j-1].value);
-	          // console.log("next fib", nextFib);
 	          if (nextFib !== -1) {
 	            this.board[i][j].value = nextFib;
 	            this.board[i][j-1].value = -1;
@@ -308,14 +331,12 @@
 	      this.renderBlocks();
 	      setTimeout(() => {
 	        this.addRandomBlock();
-	        console.log("right slide random");
 	        this.renderBlocks();
 	      }, 200);
 	    }
 	  }
 	
 	  slideBlocksLeft(){
-	    console.log("begin left slide");
 	    let emptyCount = 0;
 	    for (let i = 0; i < this.size; i++) {
 	      for (let j = 0; j < this.size; j++) {
@@ -339,10 +360,7 @@
 	        } else if (!skipConsolidated) {
 	          skipConsolidated  = true;
 	        } else {
-	          // let nextBlock = this.board[i][j+1];
-	          // let nextValue = (nextBlock ? nextBlock.value : -1);
 	          let nextFib = this.nextFib(this.board[i][j].value, this.board[i][j+1].value);
-	          // console.log("next fib", nextFib);
 	          if (nextFib !== -1) {
 	            this.board[i][j].value = nextFib;
 	            this.board[i][j+1].value = -1;
@@ -359,8 +377,6 @@
 	      this.renderBlocks();
 	      setTimeout(() => {
 	        this.addRandomBlock();
-	        console.log("left slide random");
-	
 	        this.renderBlocks();
 	      }, 200);
 	    }
@@ -409,7 +425,6 @@
 	          skipConsolidated  = true;
 	        } else {
 	          let nextFib = this.nextFib(this.board[row][col].value, this.board[row - 1][col].value);
-	          console.log("next fib", nextFib);
 	          if (nextFib !== -1) {
 	            this.board[row][col].value = nextFib;
 	            this.board[row - 1][col].value = -1;
@@ -426,8 +441,6 @@
 	      this.renderBlocks();
 	      setTimeout(() => {
 	        this.addRandomBlock();
-	        console.log("down slide random");
-	
 	        this.renderBlocks();
 	      }, 200);
 	    }
@@ -457,10 +470,7 @@
 	        } else if (!skipConsolidated) {
 	          skipConsolidated  = true;
 	        } else  {
-	          // let nextBlock = ;
-	          // let nextValue = (nextBlock ? nextBlock.value : -1);
 	          let nextFib = this.nextFib(this.board[row][col].value, this.board[row + 1][col].value);
-	          // console.log("next fib", nextFib);
 	          if (nextFib !== -1) {
 	            this.board[row][col].value = nextFib;
 	            this.board[row + 1][col].value = -1;
@@ -477,8 +487,6 @@
 	      this.renderBlocks();
 	      setTimeout(() => {
 	        this.addRandomBlock();
-	        console.log("up slide random");
-	
 	        this.renderBlocks();
 	      }, 200);
 	    }
@@ -504,31 +512,31 @@
 	  getColor() {
 	    switch (this.value) {
 	      case -1:
-	        return "#66A5AD";
+	        return "#f1f1f2";
 	      case 0:
-	        return "teal";
+	        return "#c4dfe6";
 	      case 1:
-	        return "lightblue";
+	        return "#66a5ad";
 	      case 2:
-	        return "green";
+	        return "#75b1a9";
 	      case 3:
-	        return "red";
+	        return "#2c7873";
 	      case 5:
-	        return "blue";
+	        return "#1995ad";
 	      case 8:
-	        return "brown";
+	        return "#07575b";
 	      case 13:
-	        return "purple";
+	        return "#6e6702";
 	      case 21:
-	        return "yellow";
+	        return "#86ac41";
 	      case 34:
-	        return "purple";
+	        return "#b3c100";
 	      case 55:
-	        return "purple";
+	        return "#d9b44a";
 	      case 89:
-	        return "purple";
+	        return "#ffd64d";
 	      case 144:
-	        return "purple";
+	        return "#cb6318";
 	    }
 	  }
 	}

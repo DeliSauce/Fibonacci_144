@@ -56,8 +56,8 @@
 	  let sizePicker = document.getElementById('board-size');
 	  let restartButton = document.getElementById("restart-button");
 	
-	  // sequencePicker.onchange = newGame;
-	  // sizePicker.onchange = newGame;
+	  sequencePicker.onchange = newGame;
+	  sizePicker.onchange = newGame;
 	  restartButton.onclick = newGame;
 	
 	  let size = sizePicker.value;

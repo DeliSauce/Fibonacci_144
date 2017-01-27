@@ -157,9 +157,6 @@
 	    const $sidebar = $('.sequence-tracker');
 	    $sidebar.empty();
 	    let sidebarValues = this.sequence;
-	    // if (this.startSequence === 1) {
-	    //   sidebarValues = sidebarValues.slice(1);
-	    // }
 	
 	    sidebarValues.forEach((num) => {
 	      let $fibNum = $("<div></div>");
@@ -200,7 +197,6 @@
 	    }
 	  }
 	
-	  // TODO need to update
 	  gameover() {
 	    if (this.won()) return true;
 	    for(let i = 0; i < this.size; i++) {
@@ -546,8 +542,6 @@
 	    this.row = row;
 	    this.col = col;
 	  }
-	
-	
 	
 	  getColor() {
 	    switch (this.value) {

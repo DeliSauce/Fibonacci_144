@@ -26,7 +26,7 @@ The game offers a couple of options to give the user a slightly different gaming
   * 0: 0, 1, 1, 2, 3, 5, ...
   * 1: 1, 1, 2, 3, 5, ...
 
-# Technical Details
+## Technical Details
 For this game I used HTML Canvas to draw the game board and blocks, jQuery to create the "current score" board, and CSS for styling. The logic for the gameplay is in JavaScript.
 
 One of the more difficult challenges was determining how to handle multiple collisions in a row. My approach was to have sequentially numbered blocks consolidate two at a time and chain multiple consolidation with a recursive method call.
@@ -84,3 +84,7 @@ The final step of method is to recursively call itself if any consolidations occ
         }, 200);
       }
     }
+
+
+## Future Goals
+This was a fun project to work on. I was able to hone my Canvas skills and tackled some interesting coding problems. Unfortunately, allowing blocks to combine in Fibonacci sequence order made consolidations too numerous and predictable. Whereas in the original game, a block could only combine with a block of same value, in my version each block could combine with two other blocks. For 1's it was even worse; there were three other blocks (0, 1, 2). In the future it would be interesting to try different sequences to see how gameplay was affected. 

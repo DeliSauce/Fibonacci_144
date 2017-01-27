@@ -2,10 +2,6 @@ h1, button, div, select {
   font-family: arial;
 }
 
-/** {
-  border: 1px solid red;
-}*/
-
 body {
   display: flex;
   flex-direction: column;

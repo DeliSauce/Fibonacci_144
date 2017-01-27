@@ -45,7 +45,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	const Game = __webpack_require__(1);
-	// const Instructions = require("./instructions");
 	
 	document.addEventListener("DOMContentLoaded", function(){
 	  const gameboard = document.getElementById("canvas");
@@ -56,8 +55,8 @@
 	  let sizePicker = document.getElementById('board-size');
 	  let restartButton = document.getElementById("restart-button");
 	
-	  sequencePicker.onchange = newGame;
-	  sizePicker.onchange = newGame;
+	  // sequencePicker.onchange = newGame;
+	  // sizePicker.onchange = newGame;
 	  restartButton.onclick = newGame;
 	
 	  let size = sizePicker.value;
@@ -74,7 +73,7 @@
 	  }
 	
 	  window.addEventListener('keydown', (e) => {
-	    if(!game.over) {
+	    if(!game.gameover()) {
 	      if(e.key === 'ArrowLeft') {
 	        game.moveBlocks('left');
 	        // game.updateSidebar();
@@ -192,8 +191,18 @@
 	    return max;
 	  }
 	
+	  won() {
+	    if (this.maxBoxValue() === 144) {
+	      this.renderWon();
+	      return true;
+	    } else {
+	      return false;
+	    }
+	  }
+	
 	  // TODO need to update
 	  gameover() {
+	    if (this.won()) return true;
 	    for(let i = 0; i < this.size; i++) {
 	      for(let j = 0; j < this.size; j++) {
 	        if(this.positionEmpty(i,j)) {
@@ -201,7 +210,30 @@
 	        }
 	      }
 	    }
+	    this.renderLost();
 	    return true;
+	  }
+	
+	  renderLost() {
+	    this.ctx.clearRect(0, 0, this.boardWidth, this.boardWidth);
+	    this.ctx.rect(0, 0, this.boardWidth, this.boardWidth);
+	    this.ctx.fillStyle = 'red';
+	    this.ctx.fill();
+	    this.ctx.font = "50px Arial";
+	    this.ctx.fillStyle = 'white';
+	    this.ctx.fillText("YOU LOSE!!", (this.boardWidth/2) - (140), (this.boardWidth/2) + (0));
+	    this.ctx.closePath();
+	  }
+	
+	  renderWon() {
+	    this.ctx.clearRect(0, 0, this.boardWidth, this.boardWidth);
+	    this.ctx.rect(0, 0, this.boardWidth, this.boardWidth);
+	    this.ctx.fillStyle = 'blue';
+	    this.ctx.fill();
+	    this.ctx.font = "50px Arial";
+	    this.ctx.fillStyle = 'white';
+	    this.ctx.fillText("YOU WIN!!", (this.boardWidth/2) - (140), (this.boardWidth/2) + (0));
+	    this.ctx.closePath();
 	  }
 	
 	  setupBoard() {
@@ -242,9 +274,16 @@
 	
 	        this.ctx.fill();
 	        if (block.value > -1) {
-	          this.ctx.font = "20px Arial";
+	          let fontSize = this.blockWidth/2;
+	          this.ctx.font = (fontSize).toString() + "px Arial";
 	          this.ctx.fillStyle = 'white';
-	          this.ctx.fillText(block.value, x + (this.blockWidth/2), y + (this.blockWidth/2));
+	          if(block.value >= 100) {
+	            this.ctx.fillText(block.value, x + (this.blockWidth/2) - (this.blockWidth/2.5), y + (this.blockWidth/2) + (this.blockWidth/7));
+	          } else if (block.value >= 10) {
+	            this.ctx.fillText(block.value, x + (this.blockWidth/2) - (this.blockWidth/4), y + (this.blockWidth/2) + (this.blockWidth/7));
+	          } else {
+	            this.ctx.fillText(block.value, x + (this.blockWidth/2) - (this.blockWidth/7), y + (this.blockWidth/2) + (this.blockWidth/7));
+	          }
 	        }
 	        this.ctx.closePath();
 	
@@ -253,6 +292,7 @@
 	  }
 	
 	  addRandomBlock(){
+	    if (this.gameover()) return;
 	    let positionFull = true;
 	    while(positionFull) {
 	      let x = this.randomInt(0, this.size - 1);
@@ -512,7 +552,7 @@
 	  getColor() {
 	    switch (this.value) {
 	      case -1:
-	        return "#f1f1f2";
+	        return "#b2a7a7"; //#f1f1f2
 	      case 0:
 	        return "#c4dfe6";
 	      case 1:

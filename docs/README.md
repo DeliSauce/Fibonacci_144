@@ -51,7 +51,7 @@ Set up project files (webpack, npm) and create entry html page with board and se
 Design game logic.
 
 ### Phase 3: Animation (~0.5 day)
-Design animations (sliding, block collisions, etc.)
+Design canvas (block placement, block minimizing, etc.)
 
 
 ### Bonus Features

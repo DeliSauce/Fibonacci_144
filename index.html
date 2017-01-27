@@ -3,8 +3,8 @@
   <head>
     <title class="game-title">FIBONACCI 144</title>
     <meta charset="utf-8">
-    <link href="css/reset.css" rel="stylesheet" type="text/css">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/reset.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
 
     <script type="application/javascript" src="bundle.js"></script>
     <script type="text/javascript"> </script>
@@ -20,7 +20,7 @@
 
       <div class="sidebar-left">
         <div class="sequence-tracker-header">
-          Max Score
+          Current Score
         </div>
         <div class="sequence-tracker">
 
@@ -32,6 +32,9 @@
       </div>
 
       <div class="controls">
+        <div class="button-container">
+          <button type="button" id="instructions-button" name="">Instructions</button>
+        </div>
         <label for="board-size">Board Size
           <select id="board-size">
             <option selected value="4">4x4</option>
@@ -47,11 +50,7 @@
           </select>
         </label>
         <div class="button-container">
-          <button type="button" id="restart-button" name="">Restart Game</button>
-        </div>
-        <div class="button-container">
-          <button type="button" id="instructions-button" name="">Instructions</button>
-
+          <button type="button" id="restart-button" name="">Reset Game</button>
         </div>
       </div>
 
@@ -66,7 +65,7 @@
         <h2 class="instructions-section ">Background</h2>
 
         <p>
-          Fibonacci 1044 is based on the popular game 2048, replacing 2048's sequence with the Fibonacci Sequence (0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...)
+          Fibonacci 144 is based on the popular game 2048, replacing 2048's sequence with the Fibonacci Sequence (0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...)
           <a href="https://en.wikipedia.org/wiki/Fibonacci_number" target="_blank">Wikipedia</a>
         </p>
 

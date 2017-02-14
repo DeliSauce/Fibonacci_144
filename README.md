@@ -1,10 +1,8 @@
 # Fibonacci 144
 
-Fibonacci 144 is based on the popular game 2048, replacing 2048's sequence with the Fibonacci Sequence. It is a simple game
+Fibonacci 144 is based on the popular game 2048. It involves sliding blocks into one another and combining them to create blocks with higher values. In Fibonacci 144, blocks must be in Fibonacci sequence in order to combine them. The player wins if they can get to a value of 144 before the board fills up with blocks.
 #### [live][live]
 [live]: https://delisauce.github.io/Fibonacci_144/
-
-
 
 ### Fibonacci Sequence
 The Fibonacci numbers are a sequence of numbers in which every number after the first two is the sum of the two preceding ones:
@@ -13,8 +11,6 @@ The Fibonacci numbers are a sequence of numbers in which every number after the 
 [Fibonacci (wikipedia)][Wikipedia]
 [Wikipedia]: https://en.wikipedia.org/wiki/Fibonacci_number
 
-### Goal
-Slide the numbered blocks into each other to create new blocks with higher values. The player wins if they can get to 144 before the board fills up with blocks.
 
 ### Gameplay
 Each game starts with 2 randomly placed blocks. Pressing the arrow keys on the keyboard (up, down, left, right), pushes all of the blocks on the game board in that direction. The blocks will slide as far as possible and will stop only upon coming in contact with the edge of the board or another block. If the act of sliding causes two blocks with sequential Fibonacci numbers to collide, they will reduce to one block with the next value in the sequence. After each turn a new block will be randomly added to the board.
@@ -87,4 +83,4 @@ The final step of method is to recursively call itself if any consolidations occ
 
 
 ## Future Goals
-This was a fun project to work on. I was able to hone my Canvas skills and tackled some interesting coding problems. Unfortunately, allowing blocks to combine in Fibonacci sequence order made consolidations too numerous and predictable. Whereas in the original game, a block could only combine with a block of same value, in my version each block could combine with two other blocks. For 1's it was even worse; there were three other blocks (0, 1, 2). In the future it would be interesting to try different sequences to see how gameplay was affected. 
+This was a fun project to work on. I was able to hone my Canvas skills and tackled some interesting coding problems. Unfortunately, allowing blocks to combine in Fibonacci sequence order made consolidations too numerous and predictable. Whereas in the original game, a block could only combine with a block of same value, in my version each block could combine with two other blocks. For 1's it was even worse; there were three other blocks (0, 1, 2). In the future it would be interesting to try different sequences to see how gameplay was affected.

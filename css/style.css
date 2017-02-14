@@ -1,0 +1,196 @@
+h1, button, div, select {
+  font-family: arial;
+}
+
+/** {
+  border: 1px solid red;
+}*/
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1 {
+  font-size: 40px;
+  color: #75b1a9;
+  margin: 30px 0;
+  font-weight: bold;
+
+  /*text-transform: uppercase;*/
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  align-items: center;
+  font-size: 20px;
+}
+
+.controls {
+
+  display: flex;
+  box-sizing: border-box;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 500px;
+}
+
+.sidebar-left {
+  box-sizing: border-box;
+
+  width: 200px;
+  padding: 0 35px 0 65px;
+  height: 500px;
+  /*margin: 0 30px;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*align-items: center;*/
+  /*border: 1px solid blue;*/
+}
+
+a {
+  text-decoration: underline;
+  color: blue;
+}
+
+/*.sidebar-left > * {
+  /*border: 1px solid blue;*/
+
+}*/
+
+.sequence-tracker {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-content:flex-end;
+  border: 3px solid darkgray;
+}
+
+.sequence-tracker > * {
+  padding: 5px 0;
+  font-size: 15px;
+  text-align: center;
+  color: grey;
+  border-bottom: 1px lightgray solid;
+}
+
+.sequence-tracker-header {
+  text-align: center;
+  font-weight: bolder;
+  /*color: red;
+  border: red 1px solid;*/
+}
+
+button, select {
+  cursor: pointer;
+  width: 120px;
+}
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: background-color 0.3s;
+  background-color: #75b1a9;
+	border: #2c7873 2px solid;
+  border-radius: 3px;
+  color: white;
+  height: 50px;
+  margin: 15px 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+
+}
+
+button:hover {
+  background-color: #2c7873;
+}
+
+select {
+  height: 25px;
+  font-size: 20px;
+}
+.highlighted {
+  color: black;
+  background-color: #1995ad;
+  box-sizing: border-box;
+}
+
+
+.gameplay {
+  display: flex;
+}
+
+
+.gameboard {
+  display: flex;
+  /*border: 1px solid red;*/
+}
+
+
+/*@media(min-height: 500px) {
+}*/
+
+.instructions-container {
+  position: absolute;
+  border: 5px solid gray;
+  top: 100px;
+  /*left: 20px;*/
+  background-color: #66a5ad;
+  color: black;
+  height: 500px;
+  width: 550px;
+
+}
+
+.instructions-box {
+  display: flex;
+  flex-direction: column;
+  width: 550px;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  align-items: center;
+}
+.instructions-box > * {
+  /*border: 1px red solid;*/
+}
+
+
+.instructions-box > h1, h2 {
+  text-align: center;
+  margin-top: 10px;
+
+}
+.instructions-box > h1 {
+  font-size: 40px;
+}
+.instructions-box > h2 {
+  font-size: 20px;
+}
+.instructions-box > p {
+  justify-content: center;
+  font-size: 16px;
+}
+
+.hide-instructions {
+
+    visibility: hidden
+
+}
+
+.show-instructions {
+  /*z-index: 40000;*/
+}
+
+.instructions-section {
+  font-size: 20;
+  justify-content: center;
+}

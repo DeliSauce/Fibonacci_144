@@ -2,22 +2,18 @@ h1, button, div, select {
   font-family: arial;
 }
 
-/** {
-  border: 1px solid red;
-}*/
-
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: red;
 }
+
 h1 {
   font-size: 40px;
   color: #75b1a9;
   margin: 30px 0;
   font-weight: bold;
-
-  /*text-transform: uppercase;*/
 }
 
 label {
@@ -42,27 +38,18 @@ label {
 
 .sidebar-left {
   box-sizing: border-box;
-
   width: 200px;
   padding: 0 35px 0 65px;
   height: 500px;
-  /*margin: 0 30px;*/
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /*align-items: center;*/
-  /*border: 1px solid blue;*/
 }
 
 a {
   text-decoration: underline;
   color: blue;
 }
-
-/*.sidebar-left > * {
-  /*border: 1px solid blue;*/
-
-}*/
 
 .sequence-tracker {
   list-style: none;
@@ -83,8 +70,6 @@ a {
 .sequence-tracker-header {
   text-align: center;
   font-weight: bolder;
-  /*color: red;
-  border: red 1px solid;*/
 }
 
 button, select {
@@ -132,7 +117,6 @@ select {
 
 .gameboard {
   display: flex;
-  /*border: 1px solid red;*/
 }
 
 
@@ -143,7 +127,6 @@ select {
   position: absolute;
   border: 5px solid gray;
   top: 100px;
-  /*left: 20px;*/
   background-color: #66a5ad;
   color: black;
   height: 500px;
@@ -159,31 +142,27 @@ select {
   box-sizing: border-box;
   align-items: center;
 }
-.instructions-box > * {
-  /*border: 1px red solid;*/
-}
-
 
 .instructions-box > h1, h2 {
   text-align: center;
   margin-top: 10px;
-
 }
+
 .instructions-box > h1 {
   font-size: 40px;
 }
+
 .instructions-box > h2 {
   font-size: 20px;
 }
+
 .instructions-box > p {
   justify-content: center;
   font-size: 16px;
 }
 
 .hide-instructions {
-
-    visibility: hidden
-
+    visibility: hidden;
 }
 
 .show-instructions {

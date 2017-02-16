@@ -44,7 +44,7 @@ Here is my code from the sliding block method, the first part of which simply sl
         emptyCount = 0;
       }
 
-The second part of the method iterates over the blocks to check for possible consolidation. This was tricky to implement because we break out of the loop when we hit an empty space (because once the blocks have slid over we know that if we reach an empty space all successive spaces will be empty too) but empty spaces are also created upon consolidation of two blocks. I had to add a conditional (using "skipConsolidated" boolean) to continue the consolidation check if the blank space was created by a consolidation:
+The second part of the method iterates over the blocks to check for possible consolidation. This was tricky to implement because we break out of the loop when we hit an empty space (because once the blocks have slided over we know that if we reach an empty space all successive spaces will be empty too) but empty spaces are also created upon consolidation of two blocks. I had to add a conditional (using "skipConsolidated" boolean) to continue the consolidation check if the blank space was created by a consolidation:
 
       let consolidated = false;
       let skipConsolidated = true;

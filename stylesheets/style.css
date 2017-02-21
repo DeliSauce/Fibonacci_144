@@ -99,14 +99,13 @@ button, select {
   appearance: none;
   background-color: transparent;
 	border: none;
-  color: grey;
+  color: #b2a7a7;
   height: 30px;
   width: 150px;
   margin: 10px 0;
   text-align: center;
-  /*text-transform: uppercase;*/
   font-weight: bold;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 select {
@@ -134,9 +133,10 @@ select {
 .instructions-container {
   position: absolute;
   border: 5px solid gray;
+  border-radius: 5px;
   top: 100px;
-  background-color: #66a5ad;
-  color: black;
+  background-color: #c4dfe6;
+  color: gray;
   height: 500px;
   width: 550px;
 }
@@ -148,10 +148,6 @@ select {
   padding: 15px 20px;
   box-sizing: border-box;
   align-items: center;
-}
-
-.instructions-box > * {
-  /*border: 1px red solid;*/
 }
 
 .instructions-box > h1, h2 {

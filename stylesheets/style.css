@@ -22,6 +22,8 @@ label {
   margin: 10px 0;
   align-items: center;
   font-size: 20px;
+  color: #776E65;
+  font-weight: bold;
 }
 
 .controls {
@@ -55,9 +57,12 @@ a {
   flex-direction: column;
   align-content:flex-end;
   border: 3px solid darkgray;
+  border-radius: 2px;
 }
 .sequence-tracker-header {
   text-align: center;
+  color: #776E65;
+  font-weight: bold;
 }
 
 .sequence-tracker > * {
@@ -80,7 +85,7 @@ button, select {
   background-color: #75b1a9;
 	border: #2c7873 2px solid;
   border-radius: 3px;
-  color: white;
+  color: #776E65;
   height: 50px;
   margin: 15px 0;
   text-align: center;
@@ -99,7 +104,7 @@ button, select {
   appearance: none;
   background-color: transparent;
 	border: none;
-  color: #b2a7a7;
+  color: #776E65;
   height: 30px;
   width: 150px;
   margin: 10px 0;
@@ -111,11 +116,12 @@ button, select {
 select {
   height: 25px;
   font-size: 20px;
+  color: #776E65;
 }
 
 .highlighted {
-  color: black;
-  background-color: #1995ad;
+  color: #776E65;
+  background-color: #75b1a9;
   box-sizing: border-box;
 }
 
@@ -136,7 +142,7 @@ select {
   border-radius: 5px;
   top: 100px;
   background-color: #c4dfe6;
-  color: gray;
+  color: #776E65;
   height: 500px;
   width: 550px;
 }

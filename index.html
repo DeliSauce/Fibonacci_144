@@ -3,24 +3,41 @@
   <head>
     <title class="game-title">FIBONACCI 144</title>
     <meta charset="utf-8">
-    <link href="css/reset.css" rel="stylesheet" type="text/css">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/reset.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
 
     <script type="application/javascript" src="bundle.js"></script>
     <script type="text/javascript"> </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
-    <!-- <script src="./instructions.js"></script> -->
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-96481010-2', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+
   </head>
   <body>
     <div class="header">
       <h1> FIBONACCI 144</h1>
     </div>
 
+    <div class="instructions">
+      <button type="button" id="instructions-button" name="">How to Play...</button>
+    </div>
+
     <div class="gameplay">
 
       <div class="sidebar-left">
         <div class="sequence-tracker-header">
-          Max Score
+          Current Progress
         </div>
         <div class="sequence-tracker">
 
@@ -32,6 +49,10 @@
       </div>
 
       <div class="controls">
+
+        <div class="button-container">
+          <button type="button" id="restart-button" name="">Reset Game</button>
+        </div>
         <label for="board-size">Board Size
           <select id="board-size">
             <option selected value="4">4x4</option>
@@ -46,13 +67,7 @@
             <option selected value="1">1, 1, ...</option>
           </select>
         </label>
-        <div class="button-container">
-          <button type="button" id="restart-button" name="">Restart Game</button>
-        </div>
-        <div class="button-container">
-          <button type="button" id="instructions-button" name="">Instructions</button>
 
-        </div>
       </div>
 
     </div>
@@ -66,7 +81,7 @@
         <h2 class="instructions-section ">Background</h2>
 
         <p>
-          Fibonacci 1044 is based on the popular game 2048, replacing 2048's sequence with the Fibonacci Sequence (0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...)
+          Fibonacci 144 is based on the popular game 2048, replacing 2048's sequence with the Fibonacci Sequence (0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...)
           <a href="https://en.wikipedia.org/wiki/Fibonacci_number" target="_blank">Wikipedia</a>
         </p>
 

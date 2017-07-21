@@ -5,7 +5,6 @@ fieldset, label, input, textarea,
 span, article, footer, time, small {
   margin: 0;
   padding: 0;
-  // border: red solid 1px;
   outline: 0;
   font: inherit;
   color: inherit;
@@ -14,7 +13,7 @@ span, article, footer, time, small {
   vertical-align: inherit;
   box-sizing: inherit;
   background: transparent;
-  font-family: $sans-serif;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
 }
 // border: solid 1px red;
 

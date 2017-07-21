@@ -22,7 +22,7 @@ The objective of the game is to get to the number 144 before the board fills up 
 - [ ] Allow player to choose size of the board
 - [ ] Game displays board with 2 blocks randomly positioned
 - [ ] Correctly sequenced blocks will reduce to one block upon collision and display next value in Fibonacci sequence
-- [ ] Block sliding and collisions will be animated using css transitions.
+- [ ] Block movement using canvas.
 - [ ] BONUS: mobile compatibility
 
 
@@ -35,12 +35,10 @@ The objective of the game is to get to the number 144 before the board fills up 
 This project will be implemented with the following technologies:
 
 JavaScript for game logic.
-CSS and html for DOM rendering. 
+Canvas for jQuery for DOM rendering.
 Webpack to bundle and serve up the various scripts.
 
 game.js: will handle the logic of the the game.
-
-game.scss: will handle the animations.
 
 
 
@@ -53,7 +51,7 @@ Set up project files (webpack, npm) and create entry html page with board and se
 Design game logic.
 
 ### Phase 3: Animation (~0.5 day)
-Design animations (sliding, block collisions, etc.)
+Design canvas (block placement, block minimizing, etc.)
 
 
 ### Bonus Features
